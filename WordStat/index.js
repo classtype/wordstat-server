@@ -21,27 +21,35 @@ $.Socket.create({
     host: [process.env.IP, process.env.PORT],
     
 // Обработчик авторизации
-    onAccess: function(userid) {
+    onAccess: function(userid, password) {
     // Задаем UserID
         this.setUserID(userid);
         
     // Задаем информацию о юзере
         this.setData({
-            userid: userid
+            userid: userid,
+            password: password
         });
     },
     
 // Обработчик инициализации
-    onInit: function(success) {
-        return {
-            name: '123'
-        };
+    onInit: function(id) {
+        console.log('onInit: ' + id);
+        return [this.getUserID(), 'Вася'];
     }
 });
 
-$.on('Init1', function(success) {
-    console.log('Init1');
-    console.log(this.getUserID());
+/*--------------------------------------------------------------------------------------------------
+|
+| -> Добавляем обработчик GetName
+|
+|-------------------------------------------------------------------------------------------------*/
+
+$.on('getName', function(id, name) {
+    console.log('ID: ' + id);
+    console.log('name: ' + name);
+    console.log('this.getUserID(): ' + this.getUserID());
+    this.send('setName', 1, 2, 3);
 });
 
 //--------------------------------------------------------------------------------------------------

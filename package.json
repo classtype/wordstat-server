@@ -1,0 +1,10 @@
+{
+    "name": "wordstat",
+    "version": "1.0.1",
+    "private": true,
+    "dependencies": {
+        "app.init": "latest",
+        "ws": "latest",
+        "mysql": "latest"
+    }
+}
